@@ -41,6 +41,8 @@ lmr = lm(SIMS~ARM,data=data)
 abline(lmr)
 ```
 
+From this scatter plot of Model 1 SIM~ARMS have a positve association as the line passes through the middle of the plots.  
+
 
 ### Numerical results
 
@@ -48,6 +50,7 @@ abline(lmr)
 cor(SIMS~ARM,data=data)
 ```
 
+The Numerical results gives 0.6860073.  
 
 ### Inferential  (Build model.1)
 
@@ -56,6 +59,8 @@ summary(lmr)
 newdata=c(GRIP=94, ARM=88)
 ```
 
+From the inferential results, the P-value is 0.00000000000000002.  
+The adjusted R-squared is 0.467, and the multiple R-squared is 0.4706.  
 
 #### Predict at target point
 
@@ -64,13 +69,15 @@ predictSIM = predict.lm(lmr, newdata=data.frame(GRIP = 94, ARM = 88))
 print(predictSIM)
 ```
 
+The predicted target piont is 0.7063836.  
 
 #### scatterplot with model fit
 
 ```{r}
 plot(lmr)
 ```
-  
+
+From the plot residuals vs leverage, there is a great concentration of the number of plot on the leverage axis 0.01 and standardized residuals axis on -1 till 2.      
 
 ## Model 2 SIM~GRIP
 
@@ -82,6 +89,8 @@ gp = lm(SIMS~GRIP,data=data)
 abline(gp)
 ```
 
+From this scatter plot Model 2 SIM~GRIP, there is a line that passes through the middle of the plots, which implies there is a positive association between the variables SIMS and GRIP.   
+
 
 ### Numerical results 
 
@@ -89,6 +98,7 @@ abline(gp)
 cor(SIMS~GRIP,data=data)
 ```
 
+The numerical results gives 0.6398458.  
 
 ### Inferential  (Build model.2)
 
@@ -97,6 +107,9 @@ summary(gp)
 newdata=c(GRIP=94, ARM=88)
 ```
   
+From the inferential results, the p-value is 0.00000000000000002.  
+The multiple R-squared gives 0.4094, and the adjusted R-squared gives 0.4053.  
+  
 
 #### predict model.2 at target point
 
@@ -104,7 +117,7 @@ newdata=c(GRIP=94, ARM=88)
 predictSIM = predict.lm(gp, newdata=data.frame(GRIP = 94, ARM = 88))
 print(predictSIM)
 ```
-
+The prediction for the model.2 at target point is -0.5361543.  
 
 #### now add the model fit to our plot for model.2
   
@@ -112,6 +125,7 @@ print(predictSIM)
 plot(gp)
 ```
 
+Based on the scattered plot residuals vs fitted, there is a curve that passes through the plotts. This implies that there is a variable that does not increase at a certain level.  
 
 ## Model 3 SIM~ARM+GRIP
 
@@ -122,7 +136,8 @@ data2=lm(SIMS~ARM+GRIP,data=data)
 summary(data2)
 ```
 
-
+From the numerical results, the p-value is 0.00000000000000000.  
+The multiple R-squared gives 0.5422, and the Adjusted R-squared is 0.5358.  
   
 ### Inferential  (Build 2-dimentional model.3)
 
@@ -131,6 +146,7 @@ summary(data2)
 ```{r}
 predict.lm(data2, newdata=data.frame(GRIP=94, ARM=88))
 ```
+ The prediction of model.3 at target point is 0.1496476.  
   
 
 ## Comparing nested models ANOVA Test
@@ -141,6 +157,7 @@ predict.lm(data2, newdata=data.frame(GRIP=94, ARM=88))
 anova(lmr, data2)
 ```
 
+Comparing the Model.1 vs Model.3 using annova test, The sum of sq gives 29.45.  
 
 ### Model.2 vs Model.3
 
@@ -148,6 +165,10 @@ anova(lmr, data2)
 anova(gp, data2)
 ```
 
+Comparing the Model.1 vs Model.3 using annova test, The sum of sq gives 54.639.    
+
 
 ## Informally compare Model.1 with model.2
 
+Comparing model 1 with model 2, the residual difference in model1 is 145, slightly higher than that of model 2 which is 144.  
+The R-squared for model1 is 243.07, slightly higher than model2, which is 188.43.  
